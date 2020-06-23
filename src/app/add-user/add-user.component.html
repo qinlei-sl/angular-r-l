@@ -1,0 +1,24 @@
+<nz-table #editRowTable nzBordered [nzData]="users" nzTableLayout="fixed">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+          <th>Password</th>
+        </tr>
+      </thead>
+      <tbody>
+       <tr *ngFor="let user of editRowTable.data">
+            <td><input nz-input type="text" [(ngModel)]="firstName"/></td>
+            <td><input nz-input type="text" [(ngModel)]="lastName"/></td>
+            <td><input nz-input type="text" [value]="user.username" [(ngModel)]="username"/></td>
+            <td><input nz-input type="password" [value]="user.password" [(ngModel)]="password"/></td>
+            <td>
+              <button nz-button class="save" nzType="primary" (click)="change()">Save</button>
+              <a routerLink="/users-table" class="btn btn-link" nzDanger>Cancel</a>
+              <button nz-button nzType="primary">Save</button>
+            </td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <!-- [{"firstName":"11","lastName":"2","username":"12345","password":"123456","id":1},{"firstName":"22","lastName":"222","username":"123456","password":"123456","id":2}] -->

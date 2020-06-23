@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home';
 import { AuthGuard } from './_helpers';
+import { UserTableComponent } from './user-table/user-table.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const usersModule = () => import('./users/users.module').then(x => x.UsersModule);
@@ -11,6 +13,8 @@ const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard] },
     { path: 'account', loadChildren: accountModule },
+    { path: 'users-table', component: UserTableComponent, },
+    { path: 'edit/:id', component: AddUserComponent, },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

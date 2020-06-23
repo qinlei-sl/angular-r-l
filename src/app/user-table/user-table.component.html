@@ -1,0 +1,26 @@
+<nz-table #basicTable [nzData]="users" class="container" >
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Username</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of basicTable.data">
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.username}}</td>
+      <td class="flex">
+        <!-- <a>Action 一 {{user.name}}</a> -->
+        <nz-divider nzType="vertical"></nz-divider>
+        <button (click)="deleteUser(user.id)" nz-button nzType="primary" [disabled]="user.isDeleting">
+                    <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!user.isDeleting">Delete</span>
+                </button>
+        <button nz-button nzType="primary" nzDanger routerLink="/edit/{{user.id}}">add</button>
+
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

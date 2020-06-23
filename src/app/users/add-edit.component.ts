@@ -39,6 +39,7 @@ export class AddEditComponent implements OnInit {
         });
 
         if (!this.isAddMode) {
+            console.log(this.f.firstName)
             this.accountService.getById(this.id)
                 .pipe(first())
                 .subscribe(x => {
