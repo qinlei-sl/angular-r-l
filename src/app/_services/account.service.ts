@@ -10,6 +10,7 @@ import { User } from '@app/_models';
 @Injectable({ providedIn: 'root' })
 export class AccountService {
     private userSubject: BehaviorSubject<User>;
+    //Observable<User> 可观察对象 一般用于传值
     public user: Observable<User>;
 
     constructor(
@@ -17,7 +18,9 @@ export class AccountService {
         private http: HttpClient
     ) {
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
+        // console.log(this.userSubject.value)
         this.user = this.userSubject.asObservable();
+        // console.log(this.user)
     }
 
     public get userValue(): User {
@@ -25,9 +28,12 @@ export class AccountService {
     }
 
     login(username, password) {
+        //
         return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
             .pipe(map(user => {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                // console.debug(user instanceof User)
+                // 将用户详细信息和jwt令牌存储在本地存储中，以使用户在页面刷新之间保持登录状态
+                // console.log(user)
                 localStorage.setItem('user', JSON.stringify(user));
                 this.userSubject.next(user);
                 return user;

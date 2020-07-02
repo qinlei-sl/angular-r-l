@@ -41,10 +41,13 @@ export class RegisterComponent implements OnInit {
         if (this.form.invalid) {
             return;
         }
-
+        console.log(this.form.value)
         this.loading = true;
+        console.log(this.accountService.register(this.form.value)
+            .pipe(first()))
         this.accountService.register(this.form.value)
             .pipe(first())
+            //请求成功或者错误
             .subscribe(
                 data => {
                     this.alertService.success('Registration successful', { keepAfterRouteChange: true });

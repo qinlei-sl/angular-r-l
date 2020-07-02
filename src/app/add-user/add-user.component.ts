@@ -10,7 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit {
-  users=null;
+  users = null;
   form: FormGroup;
   firstName;
   lastName;
@@ -25,21 +25,21 @@ export class AddUserComponent implements OnInit {
     private formBuilder: FormBuilder,
     private alertService: AlertService,
     private router: Router,
-    
-    ) { }
+
+  ) { }
 
   ngOnInit() {
     // 获取页面是否为添加页面
     this.id = this.route.snapshot.params['id']
     //改变sava执行方法
     this.flag = !this.id;
-    
+
     this.accountService.getAll()
-            .pipe(first())
-            .subscribe(users => this.users = users);
+      .pipe(first())
+      .subscribe(users => this.users = users);
     const passwordValidators = [Validators.minLength(6)];
     if (this.isAddMode) {
-        passwordValidators.push(Validators.required);
+      passwordValidators.push(Validators.required);
     }
     this.id = this.route.snapshot.params['id'];
     this.form = this.formBuilder.group({
@@ -54,7 +54,7 @@ export class AddUserComponent implements OnInit {
         this.f.firstName.setValue(x.firstName);
         this.f.lastName.setValue(x.lastName);
         this.f.username.setValue(x.username);
-    });
+      });
   }
   onsubmit() {
     if (this.flag) {
