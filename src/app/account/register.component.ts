@@ -21,6 +21,15 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit() {
         this.form = this.formBuilder.group({
+            // Validators验证器
+                //min(6)最小值必须大于等于6
+                //max(8)最大值必须小于等于8
+                //required  验证表单不能为空
+                //requiredTrue 验证表单必须为true
+                //minLength()最小长度
+                //maxLength()最大长度
+                //pattern 字段为正则表达式
+
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             username: ['', Validators.required],
@@ -29,11 +38,12 @@ export class RegisterComponent implements OnInit {
     }
 
     // convenience getter for easy access to form fields
-    get f() { return this.form.controls; }
+    //便捷的获取器，可轻松访问表单字段
+    get f() { return this.form.controls;}
 
     onSubmit() {
         this.submitted = true;
-
+        console.log(this.form.value)
         // reset alerts on submit
         this.alertService.clear();
 
@@ -41,10 +51,9 @@ export class RegisterComponent implements OnInit {
         if (this.form.invalid) {
             return;
         }
-        console.log(this.form.value)
+
         this.loading = true;
-        console.log(this.accountService.register(this.form.value)
-            .pipe(first()))
+
         this.accountService.register(this.form.value)
             .pipe(first())
             //请求成功或者错误

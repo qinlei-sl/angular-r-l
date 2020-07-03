@@ -55,7 +55,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         function register() {
             const user = body
-
+            //判断用户名是否重复
             if (users.find(x => x.username === user.username)) {
                 return error('Username "' + user.username + '" is already taken')
             }

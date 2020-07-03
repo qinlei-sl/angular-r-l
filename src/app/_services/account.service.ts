@@ -20,7 +20,7 @@ export class AccountService {
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
         // console.log(this.userSubject.value)
         this.user = this.userSubject.asObservable();
-        // console.log(this.user)
+        console.log(this.user)
     }
 
     public get userValue(): User {
